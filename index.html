@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Filter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer>
+        function filterVideos() {
+            const searchTerm = document.getElementById('searchTerm').value.toLowerCase();
+            const videos = [
+                { title: 'Amazing Nature', likes: 1200 },
+                { title: 'Tech Reviews', likes: 2500 },
+                { title: 'Travel Vlog', likes: 1800 },
+                { title: 'Cooking Show', likes: 900 },
+                { title: 'Fitness Tips', likes: 3000 },
+            ];
+
+            const filteredVideos = videos.filter(video => video.title.toLowerCase().includes(searchTerm));
+
+            const resultsContainer = document.getElementById('results');
+            resultsContainer.innerHTML = '';
+
+            if (filteredVideos.length > 0) {
+                filteredVideos.forEach(video => {
+                    const videoElement = document.createElement('div');
+                    videoElement.className = 'p-4 mb-4 bg-gray-100 rounded-lg shadow';
+                    videoElement.textContent = `${video.title} - ${video.likes} likes`;
+                    resultsContainer.appendChild(videoElement);
+                });
+            } else {
+                resultsContainer.textContent = 'No videos found matching your search.';
+                resultsContainer.className = 'text-red-500 font-bold mt-4';
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation Bar -->
+    <nav class="bg-blue-500 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-white text-2xl font-bold">YouTube Video Filter</h1>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-center mb-8">Find Your Favorite YouTube Videos</h2>
+            <div class="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-8">
+                <div class="mb-4">
+                    <label for="searchTerm" class="block text-gray-700 font-bold mb-2">Search Videos</label>
+                    <input type="text" id="searchTerm" class="w-full p-3 border rounded-lg" placeholder="Enter video title keywords">
+                </div>
+                <button 
+                    onclick="filterVideos()"
+                    class="w-full px-4 py-2 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600">
+                    Search
+                </button>
+                <div id="results" class="mt-6"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-500 text-white text-center py-4">
+        <p>&copy; 2025 YouTube Video Filter. All rights reserved.</p>
+    </footer>
+</body>
+</html>
